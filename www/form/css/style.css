@@ -30,18 +30,13 @@
   right: 20px;
 }
 
-body {
-  font: 12px/22px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: url(../images/005.png) left top;
-}
-
 .clear {
   clear: both;
 }
 
 .box {
   width: 300px;
-  margin: 120px auto;
+  margin: 20px 40px;
   position: relative;
   z-index: 1;
 }
@@ -190,7 +185,6 @@ input[type=text], input[type=password] {
 input[type=text]:focus, input[type=password]:focus {
   outline: none;
   border: none;
-  border: 1px solid #cccccc;
 }
 
 button {

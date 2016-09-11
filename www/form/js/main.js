@@ -4,22 +4,21 @@ $(document).ready(function() {
 });
 
 function checkEmail(input, valid_view) {
-	// if($(input).val() != '') {
-	// 	var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-	// 	if(pattern.test($(input).val())){
-	// 		$(input).css({'border' : '1px solid #569b44'});
-	// 		$(valid_view).text('Верно');
-	// 		return true;
-	// 	} else {
-	// 		$(input).css({'border' : '1px solid #ff0000'});
-	// 		$(valid_view).text('Не верно');
-	// 	}
-	// } else {
-	// 	$(input).css({'border' : '1px solid #ff0000'});
-	// 	$(valid_view).text('Поле email не должно быть пустым');
-	// }
-//изменить на false
-	return true;
+	if($(input).val() != '') {
+		var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+		if(pattern.test($(input).val())){
+			$(input).css({'border' : '1px solid #569b44'});
+			$(valid_view).text('Верно');
+			return true;
+		} else {
+			$(input).css({'border' : '1px solid #ff0000'});
+			$(valid_view).text('Не верно');
+		}
+	} else {
+		$(input).css({'border' : '1px solid #ff0000'});
+		$(valid_view).text('Поле email не должно быть пустым');
+	}
+	return false;
 };
 
 function CountLogin(login_id, count_view, correct_view_login, pass_id, correct_view_pass) {
@@ -50,28 +49,28 @@ function checkPassAndLogin(login_id, pass_id, correct_view_login, correct_view_p
 	var correctViewPass = document.getElementById(correct_view_pass);
 
 	// Если логин меньше 4 символов
-	// if (login_value.length < 5) {
-	// 	correctViewLogin.innerHTML = 'не менее 5 символов';
-	// 	// меняем класс слоя для показа ошибки
-	// 	correctViewLogin.className = 'info';
-	// 	return;
-	// }
-	// correctViewLogin.innerHTML = 'верно';
-	// correctViewLogin.className = 'correct';
+	if (login_value.length < 5) {
+		correctViewLogin.innerHTML = 'не менее 5 символов';
+		// меняем класс слоя для показа ошибки
+		correctViewLogin.className = 'info';
+		return;
+	}
+	correctViewLogin.innerHTML = 'верно';
+	correctViewLogin.className = 'correct';
 	
 	// если пароль меньше 4 символов
-	// if (pass_value.length < 4) {
-	// 	correctViewPass.innerHTML = 'пароль должен содержать от 4 до 20 символов';
-	// 	correctViewPass.className = 'info';
-	// 	return;
-	// }
+	if (pass_value.length < 4) {
+		correctViewPass.innerHTML = 'пароль должен содержать от 4 до 20 символов';
+		correctViewPass.className = 'info';
+		return;
+	}
 
 	// Если логин и пароль совпадают
-	// if (login_value == pass_value) {
-	// 	correctViewPass.innerHTML = 'пароль совпадает с логином';
-	// 	correctViewPass.className = 'acorrect';
-	// 	return;
-	// }
+	if (login_value == pass_value) {
+		correctViewPass.innerHTML = 'пароль совпадает с логином';
+		correctViewPass.className = 'acorrect';
+		return;
+	}
 
 	correctViewPass.innerHTML = 'верно';
 	correctViewPass.className = 'correct';
@@ -144,41 +143,41 @@ $(function() {
 	});
 
 	// Обработка формы регистрации
-	// $('#reg_form').submit(function(e) {
-	// 	var email = $('#email_id_reg').val();
-	// 	var login = $('#reg_login_id').val();
-	// 	var pass = $('#reg_pass_id').val();
-	// 	var repass = $('#reg_repass_id').val();
+	$('#reg_form').submit(function(e) {
+		var email = $('#email_id_reg').val();
+		var login = $('#reg_login_id').val();
+		var pass = $('#reg_pass_id').val();
+		var repass = $('#reg_repass_id').val();
 
-	// 	if (!checkLengthAllFields(login, pass, repass, email)) {
-	// 		e.preventDefault()
-	// 		alert('Вы должны заполнить все поля');
-	// 		return;
-	// 	}
+		if (!checkLengthAllFields(login, pass, repass, email)) {
+			e.preventDefault()
+			alert('Вы должны заполнить все поля');
+			return;
+		}
 
-	// 	if (!email.length) {
-	// 		e.preventDefault();
-	// 		alert('Поле E-mail не должно быть пустым');
-	// 		return;
-	// 	}
+		if (!email.length) {
+			e.preventDefault();
+			alert('Поле E-mail не должно быть пустым');
+			return;
+		}
 
-	// 	if (!checkEmail('#email_id_reg', '#valid_reg')) {
-	// 		e.preventDefault();
-	// 		alert('Ошибка в введенном E-mail');
-	// 		return;
-	// 	}
+		if (!checkEmail('#email_id_reg', '#valid_reg')) {
+			e.preventDefault();
+			alert('Ошибка в введенном E-mail');
+			return;
+		}
 
-	// 	if (login == pass) {
-	// 		e.preventDefault();
-	// 		alert('Логин и пароль не должны совпадать');
-	// 		return;
-	// 	}
+		if (login == pass) {
+			e.preventDefault();
+			alert('Логин и пароль не должны совпадать');
+			return;
+		}
 
-	// 	if (login.length < 5 || pass < 4) {
-	// 		e.preventDefault();
-	// 		alert('Логин должен быть длиннее 4 символов. Пароль длиннее 3 символов');
-	// 		return;	
-	// 	}
+		if (login.length < 5 || pass < 4) {
+			e.preventDefault();
+			alert('Логин должен быть длиннее 4 символов. Пароль длиннее 3 символов');
+			return;	
+		}
 
 		if (pass != repass) {
 			// Отменяем отправку формы

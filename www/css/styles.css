@@ -1,3 +1,18 @@
+@font-face {
+    font-family: myFont;
+    src: url(../fonts/PT_Sans-Web-Regular.ttf);
+}
+
+@font-face {
+    font-family: myFont;
+    src: url(../fonts/PT_Sans-Web-Bold.ttf);
+    font-weight: 700;
+}
+
+p, h1, h2, h3, h4, h5, h6, strong, b {
+	font-family: myFont;
+}
+
 body {
 	background-color: #4CAF50;
 }
@@ -27,6 +42,7 @@ body {
 	width: 400px; 
 	height: 251px; 
 	margin: 15px 25px; 
+	float: right;
 }
 
 .indent {
@@ -148,6 +164,7 @@ body {
 }
 
 .mini {
+	float: right;
 	color: #666;
 	font-size: 10px;
 }
