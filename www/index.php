@@ -157,7 +157,7 @@
 				<p><input type="submit"  value="Отправить"></input></p>
 			</form>
 		</div>
-
+			<p><center><a href="<? echo $pathBegin; ?>pages/about.php">О сайте</a></center></p>
 	</div>
 </body>
 </html>
