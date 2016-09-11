@@ -16,6 +16,8 @@
 	$isRegister = false;
 	// Показываем форму Восстановление пароля
 	$isForgot = false;
+	//Это POST запрос
+	$isPost = false;
 
 	// Общая переменная для хранения email
 	$email = '';
@@ -23,7 +25,8 @@
 	$emailIsValid = true;
 	$loginIsValid = true;
 
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['seen'])) {
+		
 		if (isset($_POST['register_form'])) {
 			$email = $_POST['reg_email'];
 			$login = $_POST['reg_login'];
@@ -34,7 +37,7 @@
 		} else if (isset($_POST['login_form'])) {
 			$login = $_POST['auth_login'];
 			$password = $_POST['auth_pass'];
-
+			$isPost = true;
 			$isLogin = true;
 		} else if (isset($_POST['forgot_form'])) {
 			$email = $_POST['forgot_email'];
@@ -112,12 +115,28 @@
 						<h2 class="loginTitle">Авторизация</h2>
 						<div class="loginContent">
 							<div class="inputWrapper">
-								<input type="text" name="auth_login" id="auth_login_id" onkeyup="CountLogin('auth_login_id','auth_login_view','auth_login_correct','auth_pass_id','auth_pass_correct')" placeholder="Логин" <? if ($isLogin) { echo "value='" . $login . "'";} ?> />
+								<input type="text" name="auth_login" id="auth_login_id" onkeyup="CountLogin('auth_login_id','auth_login_view','auth_login_correct','auth_pass_id','auth_pass_correct')" placeholder="Логин" <? if ($isLogin) { echo "value='" . $login . "'";} 
+										if ($isLogin && $isPost) {
+											echo "style='";
+											if ($loginIsValid) { echo "border: 1px solid rgb(86, 155, 68);"; }
+											else { echo "border: 1px solid rgb(255, 0, 0);";}
+											echo "'";
+										} 
+									?> 
+								/>
 								<div class="mini">введено: <span id="auth_login_view">0</span></div>
 								<div class="info" id="auth_login_correct">не менее 5 символов</div>
 							</div>
 						<div class="inputWrapper">
-							<input  type="password" name="auth_pass" id="auth_pass_id" maxLength="20" onkeyup="CountPass('auth_pass_id','auth_pass_view','auth_pass_correct','auth_login_id', 'auth_login_correct')" value="" placeholder="Пароль" />
+							<input  type="password" name="auth_pass" id="auth_pass_id" maxLength="20" onkeyup="CountPass('auth_pass_id','auth_pass_view','auth_pass_correct','auth_login_id', 'auth_login_correct')" value="" placeholder="Пароль" 
+							<? if ($isLogin && $isPost) {
+									echo "style='";
+									if ($passIsValid) { echo "border: 1px solid rgb(86, 155, 68);"; }
+									else { echo "border: 1px solid rgb(255, 0, 0);";}
+									echo "'";
+								}
+								?>
+							/>
 						<div class="mini">введено: <span id="auth_pass_view">0</span></div>
 						<div class="info" id="auth_pass_correct">пароль должен содержать от 4 до 20 символов</div>
 						</div>
@@ -199,7 +218,15 @@
 							<h2 class="loginTitle">Восстановления пароля</h2>
 							<div class="loginContent">
 								<div class="inputWrapper">
-									<input id="email_id_rec"  type="text" name="forgot_email" placeholder="Ваш email" <? if ($isForgot) { echo "value='" . $email . "'";} ?> />
+									<input id="email_id_rec"  type="text" name="forgot_email" placeholder="Ваш email" <? if ($isForgot) { echo "value='" . $email . "'";} 
+										if ($isForgot) {
+											echo "style='";
+											if ($emailIsValid) { echo "border: 1px solid rgb(86, 155, 68);"; }
+											else { echo "border: 1px solid rgb(255, 0, 0);";}
+											echo "'";
+										} 
+									?> 
+									/>
 									<span id="valid_rec"></span>
 								</div>
 							<div class="placeholder"></div>
@@ -314,9 +341,9 @@
 			?>
 		<div id="content">
 			<form method='post'>
-				<p>ФИО*: <input type="text" name="fio" value="<?=@$fio;?>"></input><span style="background:#FF0000;"><?=@$sp_fio;?></span></p>
-				<p>Электронная почта*: <input type="text" name="el_p" value="<?=@$el_p;?>"></input><span style="background:#FF0000;"><?=@$sp_elp;?></span></p>
-				<p>Тема сообщения: <input type="text" name="theme"></input></p>
+				<p>ФИО*: <br> <input style="width: 200px; border: solid 1px #cccccc;" type="text" name="fio" value="<?=@$fio;?>"></input><span style="background:#FF0000;"><?=@$sp_fio;?></span></p>
+				<p>Электронная почта*: <br> <input style="width: 200px; border: solid 1px #cccccc;" type="text" name="el_p" value="<?=@$el_p;?>"></input><span style="background:#FF0000;"><?=@$sp_elp;?></span></p>
+				<p>Тема сообщения: <br> <input style="width: 200px; border: solid 1px #cccccc;" type="text" name="theme"></input></p>
 				<p>Сообщение*:</p>
 				<p><textarea name="message" rows="10" cols="50"><?=@$mes;?></textarea><span style="background:#FF0000;"><?=@$sp_mes;?></span></p>
 				<input type="hidden" name="seen" value="data"></input>
